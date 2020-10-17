@@ -17,18 +17,17 @@ bool confirmacion_de_impacto(float *proyectil, float *destino){
     v_x = v_0*cos(a);
     v_y = v_0*sin(a);
 
+
     x_f -= r_impacto;
 
-    //cout<<x_f<<' '<<y_f<<' '<< x_0<<' '<<y_0<<endl;
-
-    for(float increment = 0 ;increment<r_impacto*2; increment+= 0.01){
+    for(float increment = 0 ;increment<r_impacto; increment+= 0.01){
 
         t = ((x_f + increment) - x_0)/(v_x);
 
         y = y_0 + ((v_y - (g*t))*t) - (0.5*g*(t*t));
 
         if(abs(y - y_f) <= r_impacto){
-           proyectil[5] = ((x_f+r_impacto) - x_0)/(v_x);
+           proyectil[5] = abs(t);
           return true;
         }
     }
@@ -37,11 +36,11 @@ bool confirmacion_de_impacto(float *proyectil, float *destino){
 
 void imprimir_proyectil(float *proyectil, float *destino){
 
-    cout<<"Velocidad inicial:"<<proyectil[2]<<endl;
-    cout<<"Angulo del proyectil: "<<proyectil[3]<<endl;
-    cout<<"Tiempo de impacto: "<<proyectil[5]<<endl;
-    cout<<"distancia  recorrida en X: "<<abs(destino[0] - proyectil[0])<<endl;
-    cout<<"distancia  recorrida en Y: "<<abs(destino[1] - proyectil[1])<<endl;
+    cout<<"Velocidad inicial: "<<proyectil[2]<<" km/h"<<endl;
+    cout<<"Angulo del proyectil: "<<proyectil[3]<<" grados"<<endl;
+    cout<<"Tiempo de impacto: "<<proyectil[5]<<" s"<<endl;
+    cout<<"distancia  recorrida en X: "<<abs(destino[0] - proyectil[0])<<" m"<<endl;
+    cout<<"distancia  recorrida en Y: "<<abs(destino[1] - proyectil[1])<<" m"<<endl;
     cout<<endl;
 
 }

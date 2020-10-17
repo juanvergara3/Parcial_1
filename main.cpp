@@ -52,7 +52,7 @@ int main()
         }
 
         case 2:{
-            generar_disparos_ofensivos(c_d, c_o, r_impacto_o);
+            generar_disparos_ofensivos(c_d, c_o, r_impacto_d);
             break;
         }
 
