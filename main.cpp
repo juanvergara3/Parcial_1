@@ -15,13 +15,13 @@ int main()
     cout<<"Ingrese la altura del cañon ofensivo: "; cin>>h_o;
     cout<<"Ingrese la altura del cañon defensivo: "; cin>>h_d;
 
-    float x_0o = 0, y_0o = h_o, v_0o = 0, t_0o = 0, t_fo = 0, a_o = 0, r_impacto = ; //parametros del proyectil defensivo
-    float x_0d = d, y_0d = h_d, v_0d = 0, t_0d = t_0o+2, t_fd = 0, a_d; //parametros del proyectil defensico
+    float x_0o = 0, y_0o = h_o, v_0o = 0, t_0o = 0, t_fo = 0, a_o = 0, r_impacto_o = 0.05*d; //parametros del proyectil defensivo
+    float x_0d = d, y_0d = h_d, v_0d = 0, t_0d = t_0o+2, t_fd = 0, a_d = 0, r_impacto_d = 0.025*d; //parametros del proyectil defensico
 
-    float proyectil_o[2] = {v_0o, a_o};
-    float proyectil_d[2] = {v_0d, a_d};
+    float proyectil_o[5] = {x_0o, y_0o, v_0o, a_o, r_impacto_o}; //velocidad inicial, angulo, radio de impacto
+    float proyectil_d[5] = {x_0d, y_0d, v_0d, a_d, r_impacto_d};
 
-
+    float c_o[2] = {0, h_o}, c_d[2] = {d, h_d};
 
     return 0;
 }
