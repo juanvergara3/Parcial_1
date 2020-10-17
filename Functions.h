@@ -2,6 +2,6 @@
 #include <cmath>
 using namespace  std;
 
-void generar_disparo_ofensivo(float *, float *);
+void generar_disparos_ofensivos(float *, float *);
 
-bool confirmacion_de_impacto(float*, float*);
+bool confirmacion_de_impacto(float*, float*, float);
