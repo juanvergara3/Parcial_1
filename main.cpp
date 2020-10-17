@@ -18,10 +18,38 @@ int main()
     float x_0o = 0, y_0o = h_o, v_0o = 0, t_0o = 0, t_fo = 0, a_o = 0, r_impacto_o = 0.05*d; //parametros del proyectil defensivo
     float x_0d = d, y_0d = h_d, v_0d = 0, t_0d = t_0o+2, t_fd = 0, a_d = 0, r_impacto_d = 0.025*d; //parametros del proyectil defensico
 
-    float proyectil_o[5] = {x_0o, y_0o, v_0o, a_o, r_impacto_o}; //velocidad inicial, angulo, radio de impacto
-    float proyectil_d[5] = {x_0d, y_0d, v_0d, a_d, r_impacto_d};
+    float proyectil_o[6] = {x_0o, y_0o, v_0o, a_o, r_impacto_o, t_0o}; //velocidad inicial, angulo, radio de impacto
+    float proyectil_d[6] = {x_0d, y_0d, v_0d, a_d, r_impacto_d, t_0d};
 
     float c_o[2] = {0, h_o}, c_d[2] = {d, h_d};
+
+    short selec;
+    bool loop = true;
+
+    while (loop){
+
+        cout<<"1 = generar disparos del cañon ofensivo."<<endl;
+        cout<<"2 = generar disparos del cañon defensivo."<<endl;
+        cout<<"3 = generar disparos defensivos (sin importar si el cañon ofensivo es destruido o no)."<<endl;
+        cout<<"4 = generar disparos defensivos (sin destruir el cañon ofensivo)"<<endl;
+        cout<<"-1 = salir"<<endl;
+        cout<<"Ingrese 1, 2, 3, 4 o -1: ";cin>>selec;
+
+        switch (selec) {
+
+        default:{
+            cout<<"Opcion invalida"<<endl;
+            break;
+        }
+        case -1:{
+            loop = false;
+            break;
+        }
+
+
+        }
+    }
+
 
     return 0;
 }
