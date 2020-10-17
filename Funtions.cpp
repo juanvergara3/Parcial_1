@@ -2,7 +2,7 @@
 
 bool confirmacion_de_impacto(float *proyectil, float *destino){
 
-    float x_0, y_0, x_f, y_f, v_0, v_x, v_y, a, r_impacto, y, t, g = -9.81;
+    float x_0, y_0, x_f, y_f, v_0, v_x, v_y, a, r_impacto, y, t, g = 9.81;
 
     x_f = destino[0];
     y_f = destino[1];
@@ -19,15 +19,17 @@ bool confirmacion_de_impacto(float *proyectil, float *destino){
 
     x_f -= r_impacto;
 
-    for(float increment = 0.01 ;increment<r_impacto*2; increment+= 0.01){
+    //cout<<x_f<<' '<<y_f<<' '<< x_0<<' '<<y_0<<endl;
 
-        t = (x_f - x_0)/(v_x);
+    for(float increment = 0 ;increment<r_impacto*2; increment+= 0.01){
 
-        y = y_0 + ((v_y - (g*t))*t) + (0.5*g*(t*t));
+        t = ((x_f + increment) - x_0)/(v_x);
+
+        y = y_0 + ((v_y - (g*t))*t) - (0.5*g*(t*t));
 
         if(abs(y - y_f) <= r_impacto){
+           proyectil[5] = ((x_f+r_impacto) - x_0)/(v_x);
           return true;
-          proyectil[6] = t;
         }
     }
     return false;
@@ -38,8 +40,8 @@ void imprimir_proyectil(float *proyectil, float *destino){
     cout<<"Velocidad inicial:"<<proyectil[2]<<endl;
     cout<<"Angulo del proyectil: "<<proyectil[3]<<endl;
     cout<<"Tiempo de impacto: "<<proyectil[5]<<endl;
-    cout<<"distancia  recorrida en X: "<<destino[0] - proyectil[0]<<endl;
-    cout<<"distancia  recorrida en Y: "<<destino[1] - proyectil[1]<<endl;
+    cout<<"distancia  recorrida en X: "<<abs(destino[0] - proyectil[0])<<endl;
+    cout<<"distancia  recorrida en Y: "<<abs(destino[1] - proyectil[1])<<endl;
     cout<<endl;
 
 }
@@ -58,7 +60,7 @@ void generar_disparos_ofensivos(float *inicio, float *destino, float r_impacto){
 
     float *proyectil = new float[6]{x_0, y_0, v_o, a, r_impacto, t_0};
 
-    while (count<3){
+    while (true){
 
         while(true){
             confirmation = confirmacion_de_impacto(proyectil, destino);
@@ -72,11 +74,13 @@ void generar_disparos_ofensivos(float *inicio, float *destino, float r_impacto){
                 break;
             }
             proyectil[2]++; //velocidad
+            if(proyectil[2]>1500) break;
         }
+
         proyectil[2] = 1;
 
-
         proyectil[3]++; //angulo
+        if(proyectil[3] >=45 || count == 3) break;
 
     }
 
