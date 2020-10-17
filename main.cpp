@@ -18,7 +18,7 @@ int main()
     float x_0o = 0, y_0o = h_o, v_0o = 0, t_0o = 0, t_fo = 0, a_o = 0, r_impacto_o = 0.05*d; //parametros del proyectil defensivo
     float x_0d = d, y_0d = h_d, v_0d = 0, t_0d = t_0o+2, t_fd = 0, a_d = 0, r_impacto_d = 0.025*d; //parametros del proyectil defensico
 
-    float proyectil_o[7] = {x_0o, y_0o, v_0o, a_o, r_impacto_o, t_0o, t_fo}; //velocidad inicial, angulo, radio de impacto
+    float proyectil_o[7] = {x_0o, y_0o, v_0o, a_o, r_impacto_o, t_0o, t_fo}; //posicion inicial, velocidad inicial, angulo, radio de impacto, tiempo inicial y final
     float proyectil_d[7] = {x_0d, y_0d, v_0d, a_d, r_impacto_d, t_0d, t_fd};
 
     float c_o[2] = {0, h_o}, c_d[2] = {d, h_d};
@@ -46,6 +46,15 @@ int main()
             break;
         }
 
+        case 1:{
+            generar_disparos_ofensivos(c_d, c_o, r_impacto_o);
+            break;
+        }
+
+        case 2:{
+            generar_disparos_ofensivos(c_o, c_d, r_impacto_o);
+            break;
+        }
 
         }
     }

@@ -36,17 +36,22 @@ bool confirmacion_de_impacto(float *proyectil, float *destino){
 void imprimir_proyectil(float *proyectil, float *destino){
 
     cout<<"Velocidad inicial:"<<proyectil[2]<<endl;
-    a = proyectil[3];
-    r_impacto = proyectil[4];
-    t = proyectil[5];
+    cout<<"Angulo del proyectil: "<<proyectil[3]<<endl;
+    cout<<"Tiempo de impacto: "<<proyectil[5]<<endl;
+    cout<<"distancia  recorrida en X: "<<destino[0] - proyectil[0]<<endl;
+    cout<<"distancia  recorrida en Y: "<<destino[1] - proyectil[1]<<endl;
+    cout<<endl;
 
 }
 
 void generar_disparos_ofensivos(float *inicio, float *destino, float r_impacto){
 
-    float x_0, y_0, v_o = 0, a = 0, t_0 = 0;
+    float x_0, y_0, v_o = 1, a = 0, t_0 = 0;
     int count = 0;
     bool confirmation;
+
+    if(inicio[1]<destino[1]) a = asin((destino[1]-inicio[1])/(sqrt(pow(destino[1]-inicio[1],2)+pow((abs(destino[0]-inicio[0])),2))));
+    else if( inicio[1] > destino[1])  a = -1*(asin((inicio[1]-destino[1])/(sqrt(pow(inicio[1]-destino[1],2)+pow((abs(destino[0]-inicio[0])),2)))));
 
     x_0 = inicio[0];
     y_0 = inicio[1];
@@ -55,13 +60,23 @@ void generar_disparos_ofensivos(float *inicio, float *destino, float r_impacto){
 
     while (count<3){
 
-        confirmation = confirmacion_de_impacto(proyectil, destino);
+        while(true){
+            confirmation = confirmacion_de_impacto(proyectil, destino);
 
-        if(confirmation == true){
-            count++;
+            if(confirmation == true){
+                count++;
 
+                cout<<"Proyectil numero "<<count<<": "<<endl;
+                imprimir_proyectil(proyectil, destino);
+
+                break;
+            }
+            proyectil[2]++; //velocidad
         }
+        proyectil[2] = 1;
 
+
+        proyectil[3]++; //angulo
 
     }
 
