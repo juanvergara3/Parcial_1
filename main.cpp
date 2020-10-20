@@ -56,6 +56,17 @@ int main()
             break;
         }
 
+        case 3:{
+            cout<<"ingrese V_inicial y Angulo de disparo:"<<endl;
+            cin>>proyectil_o[2]>>proyectil_o[3];
+
+            cout<<confirmacion_de_impacto(proyectil_o, c_o)<<endl;
+
+            //intersepcion_proyectil(proyectil_o, c_d);
+
+            break;
+        }
+
         }
     }
 
