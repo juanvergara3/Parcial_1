@@ -40,24 +40,23 @@ void imprimir_proyectil(float *proyectil, float *destino){
 
 }
 
-void generar_disparos_ofensivos(float *inicio, float *destino, float r_impacto){
+void generar_disparos_ofensivos(float *inicio, float *destino, float r_impacto, float angulo_inicial){
 
     float x_0, y_0, v_o = 1, a = 0, t_0 = 0, t_f = 0;
     int count = 0;
-    bool confirmation, loop1 = true, loop2 = true, sum = true;
+    bool confirmation, loop1 = true, loop2 = true;
 
-    if(inicio[1] < destino[1]) a = asin((destino[1]-inicio[1])/(sqrt(pow(destino[1]-inicio[1],2)+pow((abs(destino[0]-inicio[0])),2))));
-    else if( inicio[1] > destino[1])  a = -1*(asin((inicio[1]-destino[1])/(sqrt(pow(inicio[1]-destino[1],2)+pow((abs(destino[0]-inicio[0])),2)))));
+    if(angulo_inicial == 0){
+        if(inicio[1] < destino[1]) a = asin((destino[1]-inicio[1])/(sqrt(pow(destino[1]-inicio[1],2)+pow((abs(destino[0]-inicio[0])),2))));
+        else if( inicio[1] > destino[1])  a = -1*(asin((inicio[1]-destino[1])/(sqrt(pow(inicio[1]-destino[1],2)+pow((abs(destino[0]-inicio[0])),2)))));
+    }
+
+    else a = angulo_inicial;
 
     x_0 = inicio[0];
     y_0 = inicio[1];
 
     float *proyectil = new float[7]{x_0, y_0, v_o, a, r_impacto, t_0, t_f};
-
-    if(inicio[0]>destino[0]){
-      a = 360 - a;
-      sum = false;
-    }
 
     while (loop1){
 
@@ -81,8 +80,7 @@ void generar_disparos_ofensivos(float *inicio, float *destino, float r_impacto){
 
         proyectil[2] = 1;
 
-        if (sum) proyectil[3]++; //angulo
-        else proyectil[3]++;
+        proyectil[3]++; //angulo
 
         if(count == 3) loop1 = false;
 
@@ -116,51 +114,10 @@ void intersepcion_proyectil(float *proyectil_o, float *destino_o){
         destino_d[0] = x_o;
         destino_d[1] = y_o;
 
-        generar_disparos_defensivos(destino_o, destino_d, r_impacto_d);
+        generar_disparos_ofensivos(destino_o, destino_d, r_impacto_d, 90);
 
     }
     else cout<<"El proyectil enemigo no tiene posibilidad de impacto"<<endl;
-}
-
-void generar_disparos_defensivos(float *inicio, float *destino, float r_impacto){
-
-    float x_0, y_0, v_o = 1, a = 90, t_0 = 0, t_f = 0;
-    int count = 0;
-    bool confirmation, loop1 = true, loop2 = true;
-
-    x_0 = inicio[0];
-    y_0 = inicio[1];
-
-    float *proyectil = new float[7]{x_0, y_0, v_o, a, r_impacto, t_0, t_f};
-
-    while (loop1){
-
-        loop2 = true;
-
-        while(loop2){
-
-            confirmation = confirmacion_de_impacto(proyectil, destino);
-
-            if(confirmation == true){
-                count++;
-                cout<<"Proyectil numero "<<count<<": "<<endl;
-                imprimir_proyectil(proyectil, destino);
-
-                loop2 = false;
-            }
-
-            proyectil[2]++; //velocidad
-            if(proyectil[2]>1500) break;
-        }
-
-        proyectil[2] = 1;
-        proyectil[3]++;
-
-        if(count == 3) loop1 = false;
-
-    }
-
-    delete[] proyectil;
 }
 
 
