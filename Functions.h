@@ -7,3 +7,5 @@ void generar_disparos_ofensivos(float *, float *, float);
 bool confirmacion_de_impacto(float*, float*);
 
 void intersepcion_proyectil(float*, float*);
+
+void generar_disparos_defensivos(float *, float *, float);
